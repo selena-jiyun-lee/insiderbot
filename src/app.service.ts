@@ -12,7 +12,7 @@ export class AppService {
         accessKeyId: this.configService.get('AWS_KEY'),
         secretAccessKey: this.configService.get('AWS_SECRET'),
       },
-      region: 'ap-northeast-2',
+      region: 'ap-euwest-2',
     });
     this.client = new AWS.DynamoDB.DocumentClient();
   }

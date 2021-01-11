@@ -15,7 +15,7 @@ export class AppController {
       const { text, chat } = message;
       if (text === '/start') {
         await this.appService.sendMessage(
-          'Welcome to Insider Nico Bot💖\nYou are now subscribed to insider trade alerts!',
+          'Welcome to Thomas Trading Bot💖\nYou are now subscribed to insider trade alerts!',
           chat.id,
         );
         const chatIds = await this.appService.getChatIds();
@@ -24,17 +24,17 @@ export class AppController {
             await this.appService.addChatId(chat.id);
         }
       } else {
-        await this.appService.sendMessage('Eat 김치! 💖', chat.id);
+        await this.appService.sendMessage('돈 많이 벌어💖', chat.id);
       }
     }
   }
 
-  @Interval(10000)
+  @Interval(3000)
   async scrape() {
     const chatIds = await this.appService.getChatIds();
     const lastSeen = await this.appService.getLastSeen();
     const response = await got(
-      'http://www.openinsider.com/screener?s=&o=&pl=&ph=&ll=&lh=&fd=730&fdr=&td=0&tdr=&fdlyl=&fdlyh=&daysago=&xp=1&xs=1&vl=100&vh=&ocl=&och=&sic1=-1&sicl=100&sich=9999&grp=0&nfl=&nfh=&nil=&nih=&nol=&noh=&v2l=&v2h=&oc2l=&oc2h=&sortcol=0&cnt=100&page=1',
+      'http://www.openinsider.com/screener?s=&o=&pl=&ph=&ll=&lh=&fd=730&fdr=&td=0&tdr=&fdlyl=&fdlyh=&daysago=&xp=1&vl=100&vh=&ocl=&och=&sic1=-1&sicl=100&sich=9999&grp=0&nfl=&nfh=&nil=&nih=&nol=&noh=&v2l=&v2h=&oc2l=&oc2h=&sortcol=0&cnt=100&page=1',
     );
     const $ = cheerio.load(response.body);
     let lastStock = 0;
